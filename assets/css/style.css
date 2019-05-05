@@ -1,0 +1,91 @@
+html{
+
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+}
+
+#gameWindow{
+    
+    width: 1000px;
+    height: 480px;
+    margin: 20px auto 20px auto;
+    border: 3px solid black;
+    background-color: #999999;
+}
+
+#playerScreen{
+    float: left;
+    width: 489px;
+    height: 100%;
+    border-right: 1px solid black;
+    background-color: white;
+}
+
+#opponentScreen{
+    float: right;
+    width: 489px;
+    height: 100%;
+    border-left: 1px solid black;
+    background-color: white;
+}
+
+.fightStatDisplay{
+
+    text-align: center;
+
+    width: 100%;
+    height: 64px;
+    border-bottom: 2px solid black;
+}
+
+.fightDisplay{
+    text-align: center;
+    width: 100%;
+    height: 232px;
+    border-bottom: 2px solid black; 
+}
+
+.fightMovesContainer{
+    width: 100%;
+    height: 114px;
+}
+
+.fightMovePlayer{
+    text-align: center;
+    width: 140px;
+    height: 100%;
+    border-right: 1px solid black;
+    float: left;
+}
+
+.fightMoveOpponent{
+    text-align: center;
+    width: 140px;
+    height: 100%;
+    border-left: 1px solid black; 
+    float: right
+}
+
+.fightGutsAndAcc{
+    font-size: 16px;
+    width: 66px;
+    height: 100%;
+    float: left;
+}
+
+.fightGutsDisplay{
+    text-align: center;
+    height: 56px;
+    border-bottom: 1px solid black; 
+}
+
+.fightAccDisplay{
+    text-align: center;
+    height: 56px;
+    border-top: 1px solid black; 
+}
+
+
