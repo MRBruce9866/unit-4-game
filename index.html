@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>Document</title>
 </head>
 
@@ -17,54 +19,64 @@
 
         <!-- Start of the Fight Game State -->
 
-        <div id="playerScreen">
-            <div class="fightStatDisplay" id="playerHealth"> Health: 178 / 300</div>
-            <div class="fightStatDisplay" id="playerName">Markus</div>
-            <div class="fightDisplay" id="playerDisplay"></div>
-            <div class="fightMovesContainer" id="playerMoves">
-                <div class="fightMovePlayer" id="playerMove1">
-                    Move 1
-                </div>
-                <div class="fightMovePlayer" id="playerMove2">
-                        Move 2
-                </div>
-                <div class="fightMovePlayer" id="playerMove3">
-                        Move 3
+        <div class="turnOrderDisplay">
+            ACTIVE
+            <div class="turnOrder" id="turnOrder0"></div>
+            1
+            <div class="turnOrder" id="turnOrder1"></div>
+            2
+            <div class="turnOrder" id="turnOrder2"></div>
+            3
+            <div class="turnOrder" id="turnOrder3"></div>
+            4
+            <div class="turnOrder" id="turnOrder4"></div>
+            5
+            <div class="turnOrder" id="turnOrder5"></div>
+            6
+            <div class="turnOrder" id="turnOrder6"></div>
+            7
+            <div class="turnOrder" id="turnOrder7"></div>
+
+        </div>
+
+        <div class="battleArea">
+
+            <div class="cardWrapper playerCardWrapper">
+
+                <div class="gameCard playerCard" id="playerCard1">
+
                 </div>
 
-                <div class="fightGutsAndAcc" id="playerGutsAndAcc">
-                    <div class="fightGutsDisplay" id="playerGutsDisplay">
-                        Guts
-                    </div>
+                <div class="gameCard playerCard" id="playerCard2">
 
-                    <div class="fightAccDisplay" id="playerAccDisplay">
-                        Acc.
-                    </div>
+                </div>
+
+                <div class="gameCard playerCard" id="playerCard3">
 
                 </div>
 
             </div>
-        </div>
 
-        <div id="opponentScreen">
-            <div class="fightStatDisplay" id="opponentHealth"></div>
-            <div class="fightStatDisplay" id="opponentName"></div>
-            <div class="fightDisplay" id="opponentDisplay"></div>
-            <div class="fightMovesContainer" id="opponentMoves">
-                <div class="fightMoveOpponent" id="opponentMove1"></div>
-                <div class="fightMoveOpponent" id="opponentMove2"></div>
-                <div class="fightMoveOpponent" id="opponentMove3"></div>
+            <div class="cardWrapper opponentCardWrapper">
 
-                <div class="fightGutsAndAcc" id="opponentGutsAndAcc">
-                    <div class="fightGutsDisplay" id="opponentGutsDisplay">
-
-                    </div>
-
-                    <div class="fightAccDisplay" id="opponentAccDisplay">
-
-                    </div>
+                <div class="gameCard opponentCard" id="opponentCard1">
 
                 </div>
+
+                <div class="gameCard opponentCard" id="opponentCard2">
+
+                </div>
+
+                <div class="gameCard opponentCard" id="opponentCard3">
+
+                </div>
+                <div class="gameCard opponentCard" id="opponentCard3">
+
+                </div>
+                <div class="gameCard opponentCard" id="opponentCard3">
+
+                </div>
+
 
             </div>
         </div>
@@ -75,7 +87,7 @@
 
     </div>
 
-
+    <script src="assets/javascript/game.js"></script>
 </body>
 
 </html>

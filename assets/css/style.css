@@ -9,83 +9,66 @@ body {
 
 #gameWindow{
     
-    width: 1000px;
-    height: 480px;
+    width: 1024px;
+    height: 576px;
     margin: 20px auto 20px auto;
     border: 3px solid black;
-    background-color: #999999;
+    overflow: hidden;
+    background-color: #666666;
 }
 
-#playerScreen{
+.gameCard{
+    font-size: 0;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/char1.png);
+    border-radius: 50px;
+    border: 2px solid black;    
+    margin: 0 20px -6px 20px;
+
+    box-shadow: 2px 2px black, 4px 4px gold, 8px 8px black;
+    
+    
+    
+
+}
+
+.battleArea{
     float: left;
-    width: 489px;
+    width: 948px;
     height: 100%;
-    border-right: 1px solid black;
-    background-color: white;
+    background-image: url(../images/diagonal-squares.png);
+
+}
+.cardWrapper{
+    width: fit-content;
+    margin: 0 auto;
+    padding: 94px 0 94px 0;
 }
 
-#opponentScreen{
-    float: right;
-    width: 489px;
-    height: 100%;
-    border-left: 1px solid black;
-    background-color: white;
-}
 
-.fightStatDisplay{
-
-    text-align: center;
-
-    width: 100%;
-    height: 64px;
-    border-bottom: 2px solid black;
-}
-
-.fightDisplay{
-    text-align: center;
-    width: 100%;
-    height: 232px;
-    border-bottom: 2px solid black; 
-}
-
-.fightMovesContainer{
-    width: 100%;
-    height: 114px;
-}
-
-.fightMovePlayer{
-    text-align: center;
-    width: 140px;
-    height: 100%;
-    border-right: 1px solid black;
+.turnOrderDisplay{
     float: left;
-}
-
-.fightMoveOpponent{
-    text-align: center;
-    width: 140px;
+    width: fit-content;
     height: 100%;
-    border-left: 1px solid black; 
-    float: right
-}
-
-.fightGutsAndAcc{
-    font-size: 16px;
-    width: 66px;
-    height: 100%;
-    float: left;
-}
-
-.fightGutsDisplay{
+    overflow: hidden;
+    font-size: 12px;
     text-align: center;
-    height: 56px;
-    border-bottom: 1px solid black; 
+    line-height: 15px;
+    color: white;
+    background-color: #333;
+    border: 1px solid black;
 }
 
-.fightAccDisplay{
-    text-align: center;
-    height: 56px;
-    border-top: 1px solid black; 
+.turnOrder{
+    width: 50px;
+    height: 50px;
+    margin: 0 10px 2px 10px;
+    border: 2px solid green;
+    background-color: black;
 }
 
-
+#turnOrder0{
+    border-color: gold;
+}
