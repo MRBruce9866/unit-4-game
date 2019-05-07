@@ -1,14 +1,12 @@
-html{
-
-}
+html {}
 
 body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 24px;
 }
 
-#gameWindow{
-    
+#gameWindow {
+
     width: 1024px;
     height: 576px;
     margin: 20px auto 20px auto;
@@ -17,38 +15,42 @@ body {
     background-color: #666666;
 }
 
-.gameCard{
+.gameCard {
     font-size: 0;
     display: inline-block;
     width: 100px;
     height: 100px;
-    background-image: url(../images/char1.png);
-    border-radius: 50px;
-    border: 2px solid black;    
+    border-radius: 50%;
+    border: 2px solid black;
     margin: 0 20px -6px 20px;
-
-    box-shadow: 2px 2px black, 4px 4px gold, 8px 8px black;
-    
-    
-    
-
+    overflow: hidden;
 }
 
-.battleArea{
+.playerCard{
+    box-shadow: 2px 2px black, 4px 4px #009900, 8px 8px black;
+}
+
+.opponentCard{
+    box-shadow: 2px 2px black, 4px 4px #990000, 8px 8px black;
+}
+
+.battleArea {
     float: left;
     width: 948px;
     height: 100%;
     background-image: url(../images/diagonal-squares.png);
 
 }
-.cardWrapper{
+
+.cardWrapper {
     width: fit-content;
     margin: 0 auto;
     padding: 94px 0 94px 0;
+    overflow: visible;
 }
 
 
-.turnOrderDisplay{
+.turnOrderDisplay {
     float: left;
     width: fit-content;
     height: 100%;
@@ -61,7 +63,8 @@ body {
     border: 1px solid black;
 }
 
-.turnOrder{
+.turnOrder {
+    display: block;
     width: 50px;
     height: 50px;
     margin: 0 10px 2px 10px;
@@ -69,6 +72,32 @@ body {
     background-color: black;
 }
 
-#turnOrder0{
+#turnOrder0 {
     border-color: gold;
 }
+
+#moveSelectPanel {
+    display: none;
+    position: absolute;
+    width: inherit;
+    margin-top: 20px; 
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    border: 1px solid black;
+    
+
+
+}
+
+.moveButton {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.activeCard{
+    box-shadow: 2px 2px black, 4px 4px gold, 8px 8px black;
+}
+
