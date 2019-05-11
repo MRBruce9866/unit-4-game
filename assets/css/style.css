@@ -1,9 +1,60 @@
-html {}
+html, body {
+    height: 100%;
+    margin: 0;
+}
 
 body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 24px;
+    
 }
+
+
+#characterSelectorTitle {
+    padding: 20px;
+    font-size: 32px;
+    color: white;
+    text-shadow: #333;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.contentContainer {
+
+    width: 80%;
+    height: 850px;
+    margin: 20px auto 20px auto;
+    border: 2px solid #333; 
+    
+    background-image: url(../images/mooning.png);
+
+}
+
+#characterSelectorHeader {
+    text-align: center;
+    background-color: #990000;
+    border: 2px solid #333; 
+     
+    
+}
+
+#characterSelectorFooter, .push{
+    height: 50px;
+}
+
+.wrapper{
+    min-height: 100%; 
+    margin-bottom: -50px;
+}
+
+#characterSelectorFooter {
+    
+    background-color:  #777; 
+    border-top: 5px solid #333; 
+}
+
+
+
+
 
 #gameWindow {
 
@@ -99,5 +150,15 @@ body {
 
 .activeCard{
     box-shadow: 2px 2px black, 4px 4px gold, 8px 8px black;
+}
+
+.screen{
+
+    width: inherit;
+    height: inherit;
+}
+
+#screenTitle{
+    background-color: white;
 }
 

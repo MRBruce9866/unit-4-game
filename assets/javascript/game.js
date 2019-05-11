@@ -1,119 +1,62 @@
-var testArray = [];
-
-addToArray(50);
-updateTurnOrder();
-
-function addToArray(num) {
-    for (let i = 0; i < num; i++) {
-
-        var character = "char" + (Math.floor(Math.random() * 8) + 1) + ".png"
-
-        testArray.push(character);
-
-    }
-}
+//Html selectors;
+var playerCardArray = $(".playerCard");
+var opponentCardArray = $(".opponentCard");
 
 
-function updateTurnOrder() {
-    var turnOrder = $(".turnOrder");
-    
-
-    for (let i = 0; i < turnOrder.length; i++) {
-
-        
-        $(turnOrder[i]).attr("src", "assets/images/" + testArray[i]);
-
-    }
-
-    
-}
-
-$('.playerCard').on('click', function(){
-
-    var movePan = $(this).children('#moveSelectPanel');
-
-    if(movePan.is(":hidden")){
-        movePan.slideDown();
-    }else{
-        movePan.slideUp();
-    }
-
-});
-
-$('.gameCard').on('mouseenter', function(){
-
-    $(this).addClass("activeCard");
-    
-});
-
-
-$('.gameCard').on('mouseleave', function(){
-
-    $(this).removeClass("activeCard");
-
-});
+//Global Variables
 
 
 
+//Character Objects
+
+var characterArray = [];
+
+characterArray[0] = new Character('Kage', 100, 5, 5, 5, "assets/images/Kage.png");
+characterArray[1]  = new Character('Char2', 100, 5, 5, 5, "assets/images/char2.png");
+characterArray[2]  = new Character('Char3', 100, 5, 5, 5, "assets/images/char3.png");
+characterArray[3]  = new Character('Char4', 100, 5, 5, 5, "assets/images/char4.png");
+characterArray[4]  = new Character('Char5', 100, 5, 5, 5, "assets/images/char5.png");
+characterArray[5]  = new Character('Char6', 100, 5, 5, 5, "assets/images/char6.png");
+characterArray[6]  = new Character('Char7', 100, 5, 5, 5, "assets/images/char7.png");
+characterArray[7]  = new Character('Char8', 100, 5, 5, 5, "assets/images/char8.png");
 
 
-function getMoveSelect(){
-
-    var moveSelectDiv = $('<div>');
-    var move1 = $('<div>');
-    var move2 = $('<div>');
-    var move3 = $('<div>');
-
-    moveSelectDiv.attr('id', 'moveSelectPanel');
-    move1.attr('class', 'moveButton').attr('id', 'move1').text("ATTACK");
-    move2.attr('class', 'moveButton').attr('id', 'move2').text("BUFF");
-    move3.attr('class', 'moveButton').attr('id', 'move3').text("DEFEND");
-
-    $(moveSelectDiv).append(move1);
-    $(moveSelectDiv).append(move2);
-    $(moveSelectDiv).append(move3);
-
-    return moveSelectDiv;
-}
-
-
+//Game Object
 
 $(document).ready(function () {
 
-    $(document).keydown(function (objEvent) {
 
-        var key;
+    for (let i = 0; i < playerCardArray.length; i++) {
+        
+        playerCardArray.eq(i).find('img').attr('src', characterArray[i].img);
+    }
 
-        if (objEvent == null) {
-            key = event.key;
-        } else {
-            key = objEvent.key;
-        }
-
-        key = key.toUpperCase();
-
-
-        switch (key) {
-            case "ENTER":
-
-                testArray.shift();
-                updateTurnOrder();
-
-                break;
-
-            case "R":
-                updateTurnOrder();
-                break;
-
-            default:
-
-
-                break;
-        }
-
-
-
-
-    });
+    for (let i = 0; i < opponentCardArray.length; i++) {
+        
+        opponentCardArray.eq(i).find('img').attr('src', characterArray[i+3].img);
+    }
+       
 
 });
+
+
+
+
+
+
+//Functions
+
+function Character(name, hp, att, def, spd, img) {
+
+    //String
+    this.name = name;
+
+    // Number
+    this.hitPoints = hp;
+    this.attack = att;
+    this.defense = def;
+    this.speed = spd;
+
+    //String (path)
+    this.img = img;
+}
