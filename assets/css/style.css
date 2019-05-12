@@ -77,6 +77,7 @@ header {
 
 
 .card {
+    position: relative;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 2fr 4fr 1fr 1fr 1fr;
@@ -86,6 +87,12 @@ header {
     background-color: #fff;
     font-size: 20px;
 
+}
+
+.card .removeButton{
+    position: absolute;
+    top: 5px;
+    right: 5px;    
 }
 
 .card .memberName{
