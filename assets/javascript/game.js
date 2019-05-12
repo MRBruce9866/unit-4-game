@@ -32,8 +32,6 @@ characterArray[7] = new Character('Zero', 100, 6, 6, 6, "assets/images/Zero.png"
 
 $(document).ready(function () {
 
-    // partyList.empty();
-    cycleCharacterSelector()
 
 
     //On-Click Events
@@ -51,24 +49,18 @@ $(document).ready(function () {
         addPartyMember();
     })
 
-    $("#partyList").on("click", ".removeButton", function(){
+    $("#partyList").on("click", ".removeButton", function () {
 
         removePartyMember(parseInt($(this).parent().attr("value")));
         $(this).parent().remove();
-        console.log("clicked")
-        console.log($(this).parent().attr("value"))
     });
 
 
 
-    
+
 
 
 });
-
-
-
-
 
 
 //Functions
@@ -107,26 +99,30 @@ function cycleCharacterSelector(direction = "right") {
 
     }
 
+    // characterSelector.children(".card").animate({opacity: 0}, 250, function () {
     characterSelector.children(".card").remove();
     var nextCard = getCharacterPartyCard(characterArray[characterSelectInd], true);
     characterSelector.prepend(nextCard);
 
+    // });
+
+
+
+
+
 }
 
 function getCharacterPartyCard(character, selector = false) {
-    var card;
+    var card = $("<div>").attr("class", "card");
+    card.append($("<div>").attr("class", "memberName").text(character.name));
 
     if (selector) {
-        card = $("<div>").attr("class", "card");
-        card.append($("<div>").attr("class", "memberName").text(character.name));
         card.append($("<div>").attr("class", "selectorImg").html("<img src = " + character.portrait + ">"));
         card.append($("<div>").attr("class", "memberStat").text("Attack: " + character.attack));
         card.append($("<div>").attr("class", "memberStat").text("Defense: " + character.defense));
         card.append($("<div>").attr("class", "memberStat").text("Speed: " + character.speed));
     } else {
-        card = $("<div>").attr("class", "card");
-        card.append($("<div>").attr("class", "memberName").text(character.name));
-        card.append($("<div>").attr("class", "selectorImg").html("<img src = " + character.img + ">"));
+        card.append($("<div>").attr("class", "memberImg").html("<img src = " + character.img + ">"));
         card.append($("<div>").attr("class", "memberStat").text("Attack: " + character.attack));
         card.append($("<div>").attr("class", "memberStat").text("Defense: " + character.defense));
         card.append($("<div>").attr("class", "memberStat").text("Speed: " + character.speed));
@@ -142,7 +138,7 @@ function addPartyMember() {
         partyArray.push(characterArray[characterSelectInd]);
 
         var card = getCharacterPartyCard(characterArray[characterSelectInd], false);
-        card.attr("value", partyArray.length-1);
+        card.attr("value", partyArray.length - 1);
         partyList.append(card);
         cycleCharacterSelector("right");
 

@@ -80,31 +80,38 @@ header {
     position: relative;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 2fr 4fr 1fr 1fr 1fr;
-    grid-gap: 2px;
+    grid-template-rows: 5fr 10fr 3fr 3fr 3fr 1fr;
+    grid-gap: 4px;
     box-sizing: border-box;
+    border-radius: 5%;
+    overflow: hidden;
     border: 2px solid #000;
-    background-color: #fff;
+    background-color: #ffffff;
     font-size: 20px;
+    align-items: center;
 
 }
 
 .card .removeButton{
     position: absolute;
-    top: 5px;
+    top: 6%;
     right: 5px;    
 }
 
 .card .memberName{
     font-size: 28px;
-    padding: 10px;
+    padding: 3%;
     color: white;
     background-color: #990000;
     border-bottom: 5px solid #000;
+    border-top: 1px solid #000;
+    
 }
 
 .card .memberStat{
-    padding: 5px;
+    padding: 3%;
+    border-top: 1px solid black;
+    border-bottom: 2px solid black;
     background-color: #ddd;
 }
 
@@ -113,9 +120,10 @@ header {
     margin: auto;
 }
 
-
 .memberImg > img{
+    border-radius: 5%;
     border: 1px solid #000;
+    box-shadow: 2px 2px black, 4px 4px #ddd, 6px 6px black;
 }
 
 footer {
