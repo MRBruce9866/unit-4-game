@@ -1,55 +1,121 @@
 html, body {
     height: 100%;
     margin: 0;
-}
-
-body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
     font-size: 24px;
-    
 }
 
-
-#characterSelectorTitle {
+#headerTitle {
+    box-sizing: border-box;
+    height: 75px;
     padding: 20px;
     font-size: 32px;
     color: white;
-    text-shadow: #333;
-    font-family: 'Times New Roman', Times, serif;
 }
 
-.contentContainer {
-
-    width: 80%;
-    height: 850px;
-    margin: 20px auto 20px auto;
-    border: 2px solid #333; 
-    
-    background-image: url(../images/mooning.png);
-
-}
-
-#characterSelectorHeader {
+header {
     text-align: center;
     background-color: #990000;
-    border: 2px solid #333; 
-     
+    border: 2px solid #000; 
+}
+
+.gameContainer {
+    width: 960px;
+    margin: 20px auto 20px auto;
+    border: 2px solid #000; 
+    background-image: url(../images/dark_fish_skin.png);
+}
+
+
+
+.screen{
+    min-height: 880px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 5fr 1fr;
+    grid-template-rows: 1fr 20fr 1fr; 
+}
+
+.sectionTitle{
+    color: white;
+    font-size: 24px;
+    padding: 10px;
+}
+ 
+
+#titleScreen #partyListTitle{
+    grid-row: 1;
+    grid-column: 2/3;
+    
     
 }
 
-#characterSelectorFooter, .push{
-    height: 50px;
-}
-
-.wrapper{
-    min-height: 100%; 
-    margin-bottom: -50px;
-}
-
-#characterSelectorFooter {
+#titleScreen #characterSelectorTitle{
+    grid-row: 1;
+    grid-column: 4/5;
     
+   
+    
+}
+
+#titleScreen #partyList{
+    grid-row: 2;
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    box-sizing: border-box;
+
+}
+
+#titleScreen #characterSelector{
+    grid-row: 2;
+    grid-column: 4/5;
+    box-sizing: border-box;
+}
+
+
+.card {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 2fr 4fr 1fr 1fr 1fr;
+    grid-gap: 2px;
+    box-sizing: border-box;
+    border: 2px solid #000;
+    background-color: #fff;
+    font-size: 20px;
+
+}
+
+.card .memberName{
+    font-size: 28px;
+    padding: 10px;
+    color: white;
+    background-color: #990000;
+    border-bottom: 5px solid #000;
+}
+
+.card .memberStat{
+    padding: 5px;
+    background-color: #ddd;
+}
+
+.card .memberImg,
+.card .selectorImg{
+    margin: auto;
+}
+
+
+.memberImg > img{
+    border: 1px solid #000;
+}
+
+footer {
+    box-sizing: border-box;
+    height: 75px;
     background-color:  #777; 
-    border-top: 5px solid #333; 
+    border-top: 5px solid #000; 
 }
 
 

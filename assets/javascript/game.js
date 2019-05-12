@@ -3,6 +3,7 @@ var playerCardArray = $(".playerCard");
 var opponentCardArray = $(".opponentCard");
 
 
+
 //Global Variables
 
 
@@ -11,14 +12,14 @@ var opponentCardArray = $(".opponentCard");
 
 var characterArray = [];
 
-characterArray[0] = new Character('Kage', 100, 5, 5, 5, "assets/images/Kage.png");
-characterArray[1]  = new Character('Char2', 100, 5, 5, 5, "assets/images/char2.png");
-characterArray[2]  = new Character('Char3', 100, 5, 5, 5, "assets/images/char3.png");
-characterArray[3]  = new Character('Char4', 100, 5, 5, 5, "assets/images/char4.png");
-characterArray[4]  = new Character('Char5', 100, 5, 5, 5, "assets/images/char5.png");
-characterArray[5]  = new Character('Char6', 100, 5, 5, 5, "assets/images/char6.png");
-characterArray[6]  = new Character('Char7', 100, 5, 5, 5, "assets/images/char7.png");
-characterArray[7]  = new Character('Char8', 100, 5, 5, 5, "assets/images/char8.png");
+characterArray[0] = new Character('Kage', 100, 5, 5, 5, "assets/images/KagePortrait.png");
+characterArray[1]  = new Character('Axel', 100, 5, 5, 5, "assets/images/AxelPortrait.png");
+characterArray[2]  = new Character('Professor', 100, 5, 5, 5, "assets/images/ProfessorPortrait.png");
+characterArray[3]  = new Character('Reaper', 100, 5, 5, 5, "assets/images/ReaperPortrait.png");
+characterArray[4]  = new Character('Rose', 100, 5, 5, 5, "assets/images/RosePortrait.png");
+characterArray[5]  = new Character('Spike', 100, 5, 5, 5, "assets/images/SpikePortrait.png");
+characterArray[6]  = new Character('Vanya', 100, 5, 5, 5, "assets/images/VanyaPortrait.png");
+characterArray[7]  = new Character('Zero', 100, 5, 5, 5, "assets/images/ZeroPortrait.png");
 
 
 //Game Object
@@ -46,7 +47,7 @@ $(document).ready(function () {
 
 //Functions
 
-function Character(name, hp, att, def, spd, img) {
+function Character(name, hp, att, def, spd, img, portrait) {
 
     //String
     this.name = name;
@@ -59,4 +60,9 @@ function Character(name, hp, att, def, spd, img) {
 
     //String (path)
     this.img = img;
+    this.portrait = portrait;
+}
+
+function cycleCharacterSelector(){
+
 }
