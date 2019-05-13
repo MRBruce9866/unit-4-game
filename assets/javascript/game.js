@@ -9,6 +9,9 @@ var characterSelector = $("#characterSelector");
 
 var characterSelectInd = 0;
 var partyArray = [];
+var characterCards = [];
+var screenArray = [];
+var screenIndex = 0;
 
 
 
@@ -17,7 +20,7 @@ var partyArray = [];
 //Character Objects
 
 var characterArray = [];
-var characterCards = [];
+
 
 characterArray[0] = new Character('Kage', 100, 7, 5, 4, "assets/images/Kage.png", "assets/images/KagePortrait.png");
 characterArray[1] = new Character('Axel', 100, 5, 8, 5, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
@@ -29,15 +32,13 @@ characterArray[6] = new Character('Vanya', 100, 7, 5, 4, "assets/images/Vanya.pn
 characterArray[7] = new Character('Zero', 100, 6, 6, 6, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
 
 
-
-
-
-
 //Game Object
 
 $(document).ready(function () {
     buildCharacterCards();
     cycleCharacterSelector("right");
+    buildScreenArray();
+    displayScreen(screenIndex);
     $("#continueButton").toggle();
 
 
@@ -48,21 +49,89 @@ $(document).ready(function () {
         cycleCharacterSelector("left");
     });
 
-    $("#selectorFoward").on("click", function () {
+    $("#selectorForward").on("click", function () {
         cycleCharacterSelector("right");
     });
 
+    $("#screenBackward").on("click", function () {
+        cycleScreen("left");
+    });
 
-
-
-
-
-
+    $("#screenForward").on("click", function () {
+        cycleScreen("right");
+    });
 
 });
 
 
 //Functions
+
+function buildScreenArray() {
+    screenArray = $(".screen");
+    screenArray.hide();
+    screenArray.eq(screenIndex).show();
+}
+
+function cycleScreen(direction) {
+    screenArray.eq(screenIndex).hide();
+    if (direction === "left") {
+        screenIndex--;
+        if (screenIndex < 0) screenIndex = screenArray.length - 1;
+    } else if (direction === "right") {
+        screenIndex++;
+        if (screenIndex >= screenArray.length) screenIndex = 0;
+    }
+
+    
+    displayScreen(screenIndex);
+
+}
+
+function displayScreen(index) {
+    
+    screenIndex = index;
+
+    switch (screenIndex) {
+        case 0:
+            $("#screenBackward").hide();
+            $("#screenForward").show();
+
+            // clearGame();
+
+            break;
+
+        case 1:
+            $("#screenBackward").show();
+
+            if(partyArray.length === 3){
+                $("#screenForward").show();
+            }else{
+                $("#screenForward").hide();
+            }
+            
+
+            break;
+
+        case 2:
+
+            $("#screenBackward").hide();
+            $("#screenForward").hide();
+
+            break;
+
+        case 3:
+
+            break;
+
+        default:
+            break;
+    }
+
+
+    $("#headerTitle").text(screenArray.eq(screenIndex).attr("title"));
+
+    screenArray.eq(screenIndex).show();
+}
 
 function Character(name, hp, att, def, spd, img, portrait) {
 
@@ -101,9 +170,11 @@ function cycleCharacterSelector(direction = "right") {
     characterSelector.children(".card").remove();
 
     var card = characterCards[characterSelectInd];
-    card.bind("click", function(){ 
-        $(this).unbind();
-        addPartyMember()
+    card.bind("click", function () {
+        if (partyArray.length < 3) {
+            $(this).unbind();
+            addPartyMember()
+        }
     });
     characterSelector.prepend(card);
 
@@ -130,29 +201,30 @@ function getCharacterCard(character, party) {
 
 
 function addPartyMember() {
-    if (partyArray.length < 3) {
-        partyArray.push(characterArray[characterSelectInd]);
 
-        var card = characterCards[characterSelectInd];
-        card.attr("value", partyArray.length - 1);
+    partyArray.push(characterArray[characterSelectInd]);
 
-        card.bind("click", function () {
-            removePartyMember(parseInt($(this).attr("value")));
-            $(this).remove();
-            $(this).unbind();
-        });
+    var card = characterCards[characterSelectInd];
+    card.attr("value", partyArray.length - 1);
 
-        partyList.append(card);
-        cycleCharacterSelector("right");
+    card.bind("click", function () {
+        removePartyMember(parseInt($(this).attr("value")));
+        $(this).remove();
+        $(this).unbind();
+    });
 
-        if (partyArray.length === 3) {
-            toggleContinueButton();
-        }
+    partyList.append(card);
+    cycleCharacterSelector("right");
 
+    if (partyArray.length === 3) {
+        $("#screenForward").show();
     }
+
+
 }
 
 function removePartyMember(index) {
+    $("#screenForward").hide();
 
     if (partyArray.length > 1) {
         partyArray.splice(index, 1);
@@ -163,12 +235,6 @@ function removePartyMember(index) {
 
     console.log(partyArray.length);
 
-    if ($("#continueButton").is(":visible")) {
-        toggleContinueButton();
-    }
 
 }
 
-function toggleContinueButton() {
-    $("#continueButton").toggle();
-}

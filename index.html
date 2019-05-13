@@ -16,11 +16,18 @@
 <body>
 
     <header>
+        <div id="screenBackward"></div>
         <h1 id="headerTitle">Choose 3 Party Members</h1>
+        <div id="screenForward"></div>
     </header>
 
     <div class="gameContainer">
-        <div class="screen" id="selectScreen">
+        <div class="screen" id="titleScreen" title="Title Screen">
+
+
+
+        </div>
+        <div class="screen" id="selectScreen" title="Choose 3 Party Members">
 
             <div class="sectionTitle" id="partyListTitle">Your Party</div>
             <div id="partyList">
@@ -32,36 +39,38 @@
 
             <div id="characterSelector">
 
-                    <button id="selectorBackward">Back</button>
-                    <button id="selectorFoward">Foward</button>
-                    <!-- <button id="continueButton">CONTINUE</button> -->
+                <div id="selectorBackward"></div>
+                <div id="selectorForward"></div>
+                <!-- <button id="continueButton">CONTINUE</button> -->
 
             </div>
 
-            
+
         </div>
 
-        <div class="screen" id="battleScreen">
+        <div class="screen" id="battleScreen" title="Battle">
 
             <!-- Start of the Fight Game State -->
 
             <div class="turnOrderDisplay">
                 ACTIVE
-                <img class="turnOrder" id="turnOrder0" src=""></img>
-                1
-                <img class="turnOrder" id="turnOrder1" src=""></img>
-                2
-                <img class="turnOrder" id="turnOrder2" src=""></img>
-                3
-                <img class="turnOrder" id="turnOrder3" src=""></img>
-                4
-                <img class="turnOrder" id="turnOrder4" src=""></img>
-                5
-                <img class="turnOrder" id="turnOrder5" src=""></img>
-                6
-                <img class="turnOrder" id="turnOrder6" src=""></img>
-                7
-                <img class="turnOrder" id="turnOrder7" src=""></img>
+                <div class="turnOrder" id="turnOrder0" src=""></img>
+                    1
+                    <img class="turnOrder" id="turnOrder1" src=""></img>
+                    2
+                    <img class="turnOrder" id="turnOrder2" src=""></img>
+                    3
+                    <img class="turnOrder" id="turnOrder3" src=""></img>
+                    4
+                    <img class="turnOrder" id="turnOrder4" src=""></img>
+                    5
+                    <img class="turnOrder" id="turnOrder5" src=""></img>
+                    6
+                    <img class="turnOrder" id="turnOrder6" src=""></img>
+                    7
+                    <img class="turnOrder" id="turnOrder7" src=""></img>
+
+                </div>
 
             </div>
 
@@ -108,6 +117,8 @@
 
                 </div>
             </div>
+
+
         </div>
 
     </div>
