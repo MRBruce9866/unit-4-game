@@ -20,103 +20,99 @@
     </header>
 
     <div class="gameContainer">
-        <div class="screen" id="titleScreen">
+        <div class="screen" id="selectScreen">
 
             <div class="sectionTitle" id="partyListTitle">Your Party</div>
             <div id="partyList">
-              
+
 
             </div>
 
             <div class="sectionTitle" id="characterSelectorTitle">Character Selector</div>
 
             <div id="characterSelector">
-                <button id="selectorBackward">Back</button>
-                <button id="selectorSelect">Select</button>
-                <button id="selectorFoward">Foward</button>
+
+                    <button id="selectorBackward">Back</button>
+                    <button id="selectorFoward">Foward</button>
+                    <!-- <button id="continueButton">CONTINUE</button> -->
+
             </div>
 
+            
+        </div>
+
+        <div class="screen" id="battleScreen">
+
+            <!-- Start of the Fight Game State -->
+
+            <div class="turnOrderDisplay">
+                ACTIVE
+                <img class="turnOrder" id="turnOrder0" src=""></img>
+                1
+                <img class="turnOrder" id="turnOrder1" src=""></img>
+                2
+                <img class="turnOrder" id="turnOrder2" src=""></img>
+                3
+                <img class="turnOrder" id="turnOrder3" src=""></img>
+                4
+                <img class="turnOrder" id="turnOrder4" src=""></img>
+                5
+                <img class="turnOrder" id="turnOrder5" src=""></img>
+                6
+                <img class="turnOrder" id="turnOrder6" src=""></img>
+                7
+                <img class="turnOrder" id="turnOrder7" src=""></img>
+
+            </div>
+
+            <div class="battleArea">
+
+                <div class="cardWrapper playerCardWrapper">
+
+                    <div class="gameCard playerCard" id="playerCard1">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="gameCard playerCard" id="playerCard2">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="gameCard playerCard" id="playerCard3">
+                        <img src="" alt="">
+                    </div>
+
+                </div>
+
+                <div class="cardWrapper opponentCardWrapper">
+
+                    <div class="gameCard opponentCard" id="opponentCard1">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="gameCard opponentCard" id="opponentCard2">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="gameCard opponentCard" id="opponentCard3">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="gameCard opponentCard" id="opponentCard3">
+                        <img src="" alt="">
+                    </div>
+
+                    <div class="gameCard opponentCard" id="opponentCard3">
+                        <img src="" alt="">
+                    </div>
 
 
+                </div>
+            </div>
         </div>
 
     </div>
 
     <footer></footer>
-
-
-
-
-    <!-- <div id="gameWindow">
-
-         Start of the Fight Game State 
-
-        <div class="turnOrderDisplay">
-            ACTIVE
-            <img class="turnOrder" id="turnOrder0" src=""></img>
-            1
-            <img class="turnOrder" id="turnOrder1" src=""></img>
-            2
-            <img class="turnOrder" id="turnOrder2" src=""></img>
-            3
-            <img class="turnOrder" id="turnOrder3" src=""></img>
-            4
-            <img class="turnOrder" id="turnOrder4" src=""></img>
-            5
-            <img class="turnOrder" id="turnOrder5" src=""></img>
-            6
-            <img class="turnOrder" id="turnOrder6" src=""></img>
-            7
-            <img class="turnOrder" id="turnOrder7" src=""></img>
-
-        </div>
-
-        <div class="battleArea">
-
-            <div class="cardWrapper playerCardWrapper">
-
-                <div class="gameCard playerCard" id="playerCard1">
-                    <img src="" alt="">
-                </div>
-
-                <div class="gameCard playerCard" id="playerCard2">
-                    <img src="" alt="">
-                </div>
-
-                <div class="gameCard playerCard" id="playerCard3">
-                    <img src="" alt="">
-                </div>
-
-            </div>
-
-            <div class="cardWrapper opponentCardWrapper">
-
-                <div class="gameCard opponentCard" id="opponentCard1">
-                    <img src="" alt="">
-                </div>
-
-                <div class="gameCard opponentCard" id="opponentCard2">
-                    <img src="" alt="">
-                </div>
-
-                <div class="gameCard opponentCard" id="opponentCard3">
-                    <img src="" alt="">
-                </div>
-
-                <div class="gameCard opponentCard" id="opponentCard3">
-                    <img src="" alt="">
-                </div>
-
-                <div class="gameCard opponentCard" id="opponentCard3">
-                    <img src="" alt="">
-                </div>
-
-
-            </div>
-        </div>
-    </div> -->
-
-
 
     <script src="assets/javascript/game.js"></script>
 </body>

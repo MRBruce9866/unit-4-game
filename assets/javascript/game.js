@@ -17,6 +17,7 @@ var partyArray = [];
 //Character Objects
 
 var characterArray = [];
+var characterCards = [];
 
 characterArray[0] = new Character('Kage', 100, 7, 5, 4, "assets/images/Kage.png", "assets/images/KagePortrait.png");
 characterArray[1] = new Character('Axel', 100, 5, 8, 5, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
@@ -28,10 +29,16 @@ characterArray[6] = new Character('Vanya', 100, 7, 5, 4, "assets/images/Vanya.pn
 characterArray[7] = new Character('Zero', 100, 6, 6, 6, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
 
 
+
+
+
+
 //Game Object
 
 $(document).ready(function () {
-
+    buildCharacterCards();
+    cycleCharacterSelector("right");
+    $("#continueButton").toggle();
 
 
     //On-Click Events
@@ -45,15 +52,7 @@ $(document).ready(function () {
         cycleCharacterSelector("right");
     });
 
-    $("#selectorSelect").on("click", function () {
-        addPartyMember();
-    })
 
-    $("#partyList").on("click", ".removeButton", function () {
-
-        removePartyMember(parseInt($(this).parent().attr("value")));
-        $(this).parent().remove();
-    });
 
 
 
@@ -99,36 +98,33 @@ function cycleCharacterSelector(direction = "right") {
 
     }
 
-    // characterSelector.children(".card").animate({opacity: 0}, 250, function () {
     characterSelector.children(".card").remove();
-    var nextCard = getCharacterPartyCard(characterArray[characterSelectInd], true);
-    characterSelector.prepend(nextCard);
 
-    // });
-
-
-
-
+    var card = characterCards[characterSelectInd];
+    card.bind("click", function(){ 
+        $(this).unbind();
+        addPartyMember()
+    });
+    characterSelector.prepend(card);
 
 }
 
-function getCharacterPartyCard(character, selector = false) {
+
+function buildCharacterCards() {
+    for (let i = 0; i < characterArray.length; i++) {
+
+        characterCards[i] = getCharacterCard(characterArray[i]);
+
+    }
+}
+
+function getCharacterCard(character, party) {
     var card = $("<div>").attr("class", "card");
     card.append($("<div>").attr("class", "memberName").text(character.name));
-
-    if (selector) {
-        card.append($("<div>").attr("class", "selectorImg").html("<img src = " + character.portrait + ">"));
-        card.append($("<div>").attr("class", "memberStat").text("Attack: " + character.attack));
-        card.append($("<div>").attr("class", "memberStat").text("Defense: " + character.defense));
-        card.append($("<div>").attr("class", "memberStat").text("Speed: " + character.speed));
-    } else {
-        card.append($("<div>").attr("class", "memberImg").html("<img src = " + character.img + ">"));
-        card.append($("<div>").attr("class", "memberStat").text("Attack: " + character.attack));
-        card.append($("<div>").attr("class", "memberStat").text("Defense: " + character.defense));
-        card.append($("<div>").attr("class", "memberStat").text("Speed: " + character.speed));
-        card.append($("<button>").attr("class", "removeButton").text("X"));
-    }
-
+    card.append($("<div>").attr("class", "memberImg").html("<img src = " + character.portrait + ">"));
+    card.append($("<div>").attr("class", "memberStat").text("Attack: " + character.attack));
+    card.append($("<div>").attr("class", "memberStat").text("Defense: " + character.defense));
+    card.append($("<div>").attr("class", "memberStat").text("Speed: " + character.speed));
     return card;
 }
 
@@ -137,18 +133,42 @@ function addPartyMember() {
     if (partyArray.length < 3) {
         partyArray.push(characterArray[characterSelectInd]);
 
-        var card = getCharacterPartyCard(characterArray[characterSelectInd], false);
+        var card = characterCards[characterSelectInd];
         card.attr("value", partyArray.length - 1);
+
+        card.bind("click", function () {
+            removePartyMember(parseInt($(this).attr("value")));
+            $(this).remove();
+            $(this).unbind();
+        });
+
         partyList.append(card);
         cycleCharacterSelector("right");
 
         if (partyArray.length === 3) {
-
+            toggleContinueButton();
         }
 
     }
 }
 
 function removePartyMember(index) {
-    partyArray.splice(index);
+
+    if (partyArray.length > 1) {
+        partyArray.splice(index, 1);
+    } else {
+        partyArray.length = 0;
+    }
+
+
+    console.log(partyArray.length);
+
+    if ($("#continueButton").is(":visible")) {
+        toggleContinueButton();
+    }
+
+}
+
+function toggleContinueButton() {
+    $("#continueButton").toggle();
 }
