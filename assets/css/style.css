@@ -23,36 +23,66 @@ header {
 }
 
 .gameContainer {
+    position: relative;
     width: 90%;
     min-height: 800px;
     margin: 20px auto 20px auto;
     border: 2px solid #000; 
-    background-image: url(../images/dark_fish_skin.png);
+    
 }
 
 
 
 .screen{
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(15, 50px);
     grid-gap: 5px;
     text-align: center;
-    margin: 0 auto; 
-}
-
-#battleScreen {
-    /* display: none; */
-}
-
-#selectScreen{
-    /* display: none; */
+    margin: 0;
     
 }
 
 #titleScreen{
-    /* display: none; */
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    background-color: #000;
+}
 
+#selectScreen{
+    background-image: url(../images/dark_fish_skin.png);
+}
+
+#battleScreen{
+    background-image: url(../images/dark_fish_skin.png);
+}
+
+
+
+
+
+#mainTitle{
+    grid-column: 3/11;
+    grid-row: 5/8;
+    font-size: 98px;
+    color: white;
+}
+
+#mainAuthor{
+    align-self: start;
+    grid-column: 3/11;
+    grid-row: 8;
+    font-size: 28px;
+    color: white;
+}
+
+#mainInstructions{
+    grid-column: 3/11;
+    grid-row: 10;
+    font-size: 28px;
+    color: white;
 }
 
 .sectionTitle{
@@ -63,20 +93,15 @@ header {
 
 #selectScreen #partyListTitle{
     grid-row: 1;
-    grid-column: 1/7;
-    
+    grid-column: 2/8;
     
 }
 
 #selectScreen #characterSelectorTitle{
     grid-row: 1;
-    grid-column: 9/12;
-    
-   
-    
+    grid-column: 9/12;    
 }
 
-#selectScreen #characterSelector,
 #selectScreen #partyList{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -87,16 +112,23 @@ header {
 
 
 #selectScreen #partyList{
-    grid-row: 2 / 10;
-    grid-column: 1/7;
-    
-
+    grid-row: 2 / 12;
+    grid-column: 2/9;
+    width: fit-content;
+    padding: 10px;
 }
 
 #selectScreen #characterSelector{
-    grid-row: 2 / 10;
+    grid-row: 2 / 12;
     grid-column: 9/12;
-    grid-template-columns: 1fr 10fr 1fr;
+    
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    justify-items: center;
+    align-items: center;
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 10px;
+    box-sizing: border-box;
 }
 
 #characterSelector .card{
@@ -149,37 +181,89 @@ header #screenForward:hover{
 
 .card {
     display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 5fr 10fr 3fr 3fr 3fr 1fr;
+    grid-template-columns: 1fr 5fr 5fr 1fr;
+    grid-template-areas:
+    "name name name name"
+    "img img img img"
+    "img img img img"
+    "img img img img"
+    "hp hp hp hp"
+    "mp mp mp mp"
+    ". att mAtt ."
+    ". def mDef .";
+    width: 280px;
+    height: 500px;
     grid-gap: 4px;
     box-sizing: border-box;
     border-radius: 5%;
     overflow: hidden;
     border: 2px solid #000;
-    background-color: #ffffff;
+    background: -moz-linear-gradient(45deg,#000 20%, #444 60%, #000);
+    background: -webkit-linear-gradient(45deg,#000 20%, #444 60%, #000);
+    background: linear-gradient(45deg,#000 20% , #444 60%, #000);
     font-size: 20px;
     align-items: center;
-
 }
 .card .memberName{
+    grid-area: name;
     font-size: 28px;
     padding: 3%;
     color: white;
     background-color: #990000;
     border-bottom: 5px solid #000;
-    border-top: 1px solid #000;
-    
+    border-top: 1px solid #000;   
 }
 
 .card .memberStat{
-    padding: 3%;
-    border-top: 1px solid black;
-    border-bottom: 2px solid black;
-    background-color: #ddd;
+    padding: 5px;
+    box-sizing: border-box;
+    color: white;
+    border: 1px solid black;
+    
 }
 
 .card .memberImg{
+    grid-area: img;
+    
     margin: auto;
+}
+
+.card div > img{
+    border: 3px solid darkgoldenrod;
+}
+
+.card .memberHealth{
+    grid-area: hp;
+    background-color: #550000;
+    
+}
+
+.card .memberMana{
+    grid-area: mp;
+    background-color: #000055;
+    
+}
+
+.card .memberAttack{
+    grid-area: att;
+    background-color: #005500;
+    
+}
+
+.card .memberDefense{
+    grid-area: def;
+    background-color: #005500;
+    
+}
+.card .memberMagicAttack{
+    grid-area: mAtt;
+    background-color: #005500;
+    
+}
+.card .memberMagicDefense{
+    grid-area: mDef;
+    background-color: #005500;
+    
 }
 
 
@@ -189,105 +273,5 @@ footer {
     height: 100px;
     background-color:  #777; 
     border-top: 5px solid #000; 
-}
-
-#continueButton{
-    display: block;
-    width: 200px;
-    height: 50px;
-    margin: 20px auto 20px auto;
-}
-
-
-.gameCard {
-    font-size: 0;
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid black;
-    margin: 0 20px -6px 20px;
-    overflow: hidden;
-}
-
-.playerCard{
-    box-shadow: 2px 2px black, 4px 4px #009900, 8px 8px black;
-}
-
-.opponentCard{
-    box-shadow: 2px 2px black, 4px 4px #990000, 8px 8px black;
-}
-
-.battleArea {
-    float: left;
-    width: 948px;
-    height: 100%;
-    /* background-image: url(../images/diagonal-squares.png); */
-
-}
-
-.cardWrapper {
-    width: fit-content;
-    margin: 0 auto;
-    padding: 94px 0 94px 0;
-    overflow: visible;
-}
-
-
-.turnOrderDisplay {
-
-    grid-column: 1;
-    grid-row: 1/13;
-    font-size: 12px;
-    text-align: center;
-    line-height: 15px;
-    color: white;
-    background-color: #333;
-    border: 1px solid black;
-}
-
-.turnOrder {
-    display: block;
-    width: 50px;
-    height: 50px;
-    margin: 0 10px 2px 10px;
-    border: 2px solid green;
-    background-color: black;
-}
-
-#turnOrder0 {
-    border-color: gold;
-}
-
-#moveSelectPanel {
-    display: none;
-    position: absolute;
-    width: inherit;
-    margin-top: 20px; 
-    font-size: 16px;
-    color: black;
-    text-align: center;
-    border: 1px solid black;
-}
-
-.moveButton {
-    width: 100%;
-    padding: 10px 0 10px 0;
-    background-color: white;
-    border: 1px solid black;
-}
-
-.activeCard{
-    box-shadow: 2px 2px black, 4px 4px gold, 8px 8px black;
-}
-
-.screen{
-
-    width: inherit;
-    height: inherit;
-}
-
-#screenTitle{
-    background-color: white;
 }
 

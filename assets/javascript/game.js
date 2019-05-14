@@ -22,14 +22,14 @@ var screenIndex = 0;
 var characterArray = [];
 
 
-characterArray[0] = new Character('Kage', 100, 7, 5, 4, "assets/images/Kage.png", "assets/images/KagePortrait.png");
-characterArray[1] = new Character('Axel', 100, 5, 8, 5, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
-characterArray[2] = new Character('Professor', 100, 5, 4, 6, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png");
-characterArray[3] = new Character('Reaper', 100, 3, 9, 6, "assets/images/Reaper.png", "assets/images/ReaperPortrait.png");
-characterArray[4] = new Character('Rose', 100, 10, 2, 3, "assets/images/Rose.png", "assets/images/RosePortrait.png");
-characterArray[5] = new Character('Spike', 100, 3, 3, 9, "assets/images/Spike.png", "assets/images/SpikePortrait.png");
-characterArray[6] = new Character('Vanya', 100, 7, 5, 4, "assets/images/Vanya.png", "assets/images/VanyaPortrait.png");
-characterArray[7] = new Character('Zero', 100, 6, 6, 6, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
+characterArray[0] = new Character('Kage', 100, 100, 100, 100, 100, 100, "assets/images/Kage.png", "assets/images/KagePortrait.png");
+characterArray[1] = new Character('Axel', 100, 100, 100, 100, 100, 100, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
+characterArray[2] = new Character('Professor', 100, 100, 100, 100, 100, 100, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png");
+characterArray[3] = new Character('Reaper', 100, 100, 100, 100, 100, 100, "assets/images/Reaper.png", "assets/images/ReaperPortrait.png");
+characterArray[4] = new Character('Rose', 100, 100, 100, 100, 100, 100, "assets/images/Rose.png", "assets/images/RosePortrait.png");
+characterArray[5] = new Character('Spike', 100, 100, 100, 100, 100, 100, "assets/images/Spike.png", "assets/images/SpikePortrait.png");
+characterArray[6] = new Character('Vanya', 100, 100, 100, 100, 100, 100, "assets/images/Vanya.png", "assets/images/VanyaPortrait.png");
+characterArray[7] = new Character('Zero', 100, 100, 100, 100, 100, 100, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
 
 
 //Game Object
@@ -39,8 +39,6 @@ $(document).ready(function () {
     cycleCharacterSelector("right");
     buildScreenArray();
     displayScreen(screenIndex);
-    $("#continueButton").toggle();
-
 
     //On-Click Events
 
@@ -128,21 +126,23 @@ function displayScreen(index) {
     }
 
 
-    $("#headerTitle").text(screenArray.eq(screenIndex).attr("title"));
+    $("#headerTitle").text(screenArray.eq(screenIndex).attr("tValue"));
 
     screenArray.eq(screenIndex).show();
 }
 
-function Character(name, hp, att, def, spd, img, portrait) {
+function Character(name, hp, mana,  att, def, mAtt, mDef, img, portrait) {
 
     //String
     this.name = name;
 
     // Number
-    this.hitPoints = hp;
+    this.health = hp;
+    this.mana = mana;
     this.attack = att;
     this.defense = def;
-    this.speed = spd;
+    this.magicAttack = mAtt;
+    this.magicDefense = mDef;
 
     //String (path)
     this.img = img;
@@ -193,9 +193,13 @@ function getCharacterCard(character, party) {
     var card = $("<div>").attr("class", "card");
     card.append($("<div>").attr("class", "memberName").text(character.name));
     card.append($("<div>").attr("class", "memberImg").html("<img src = " + character.portrait + ">"));
-    card.append($("<div>").attr("class", "memberStat").text("Attack: " + character.attack));
-    card.append($("<div>").attr("class", "memberStat").text("Defense: " + character.defense));
-    card.append($("<div>").attr("class", "memberStat").text("Speed: " + character.speed));
+    card.append($("<div>").attr("class", "memberStat memberHealth").text("HEALTH: " + character.health));
+    card.append($("<div>").attr("class", "memberStat memberMana").text("MANA: " + character.mana));
+    card.append($("<div>").attr("class", "memberStat memberAttack").text("ATTACK " + character.attack));
+    card.append($("<div>").attr("class", "memberStat memberDefense").text("DEFENSE " + character.defense));
+    card.append($("<div>").attr("class", "memberStat memberMagicAttack").text("M.ATT " + character.magicAttack));
+    card.append($("<div>").attr("class", "memberStat memberMagicDefense").text("M.DEF " + character.magicDefense));
+    
     return card;
 }
 
@@ -205,7 +209,7 @@ function addPartyMember() {
     partyArray.push(characterArray[characterSelectInd]);
 
     var card = characterCards[characterSelectInd];
-    card.attr("value", partyArray.length - 1);
+    card.attr("value", characterSelectInd);
 
     card.bind("click", function () {
         removePartyMember(parseInt($(this).attr("value")));
@@ -220,20 +224,19 @@ function addPartyMember() {
         $("#screenForward").show();
     }
 
-
+    console.log(partyArray.length);
+    console.log(partyArray);
 }
 
 function removePartyMember(index) {
     $("#screenForward").hide();
 
-    if (partyArray.length > 1) {
-        partyArray.splice(index, 1);
-    } else {
-        partyArray.length = 0;
+    if (partyArray.includes(characterArray[index])) {
+        partyArray.splice(partyArray.indexOf(characterArray[index]), 1);
     }
 
-
     console.log(partyArray.length);
+    console.log(partyArray);
 
 
 }
