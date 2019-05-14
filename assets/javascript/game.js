@@ -1,67 +1,25 @@
-//Html selectors;
-var partyList = $("#partyList");
-var characterSelector = $("#characterSelector");
-var battleWindow = $("#battleWindow");
-var previewWindow = $("#previewWindow");
-
-
-//Global Variables
-
-var characterSelectInd = 0;
-var partyArray = [];
-var opponentArray = [];
-var characterCards = [];
-var characterTokens = [];
-
-var screenArray = [];
-var screenIndex = 0;
-
-var selectingAlly = false;
-var selectingOpponent = false;
-
-
-
-
-
-//Character Objects
-
-var characterArray = [];
-
-
-characterArray[0] = new Character('Kage', 100, 50, 100, 100, 100, 100, "assets/images/Kage.png", "assets/images/KagePortrait.png");
-characterArray[1] = new Character('Axel', 100, 100, 100, 100, 100, 100, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
-characterArray[2] = new Character('Professor X', 100, 100, 100, 100, 100, 100, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png");
-characterArray[3] = new Character('Reaper', 100, 100, 100, 100, 100, 100, "assets/images/Reaper.png", "assets/images/ReaperPortrait.png");
-characterArray[4] = new Character('Rose', 100, 100, 100, 100, 100, 100, "assets/images/Rose.png", "assets/images/RosePortrait.png");
-characterArray[5] = new Character('Spike', 100, 100, 100, 100, 100, 100, "assets/images/Spike.png", "assets/images/SpikePortrait.png");
-characterArray[6] = new Character('Vanya', 100, 100, 100, 100, 100, 100, "assets/images/Vanya.png", "assets/images/VanyaPortrait.png");
-characterArray[7] = new Character('Zero', 100, 100, 100, 100, 100, 100, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
-
-
 $(document).ready(function () {
-    buildCharacterCards();
-    buildCharacterTokens();
-    cycleCharacterSelector("right");
-    buildScreenArray();
-    displayScreen(screenIndex);
-
-    //On-Click Events
-
+    // //On-Click Events
+    game.init();
 
     $("#selectorBackward").on("click", function () {
-        cycleCharacterSelector("left");
+        game.getDisplay().cycleCharacterSelector("left");
     });
 
     $("#selectorForward").on("click", function () {
-        cycleCharacterSelector("right");
+        game.getDisplay().cycleCharacterSelector("right");
     });
 
+    
+
+   
+
     $("#screenBackward").on("click", function () {
-        cycleScreen("left");
+        game.getDisplay().cycleScreen("left");
     });
 
     $("#screenForward").on("click", function () {
-        cycleScreen("right");
+        game.getDisplay().cycleScreen("right");
     });
 
 });
@@ -69,246 +27,309 @@ $(document).ready(function () {
 
 //Functions
 
-function buildScreenArray() {
-    screenArray = $(".screen");
-    screenArray.hide();
-    screenArray.eq(screenIndex).show();
-}
 
-function cycleScreen(direction) {
-    screenArray.eq(screenIndex).hide();
-    if (direction === "left") {
-        screenIndex--;
-        if (screenIndex < 0) screenIndex = screenArray.length - 1;
-    } else if (direction === "right") {
-        screenIndex++;
-        if (screenIndex >= screenArray.length) screenIndex = 0;
-    }
+// function setOpponentParty() {
+//     for (let i = 0; i < characterArray.length; i++) {
 
-    
-    displayScreen(screenIndex);
+//         if (!partyArray.includes(characterArray[i])) {
+//             opponentArray.push(characterArray[i]);
+//         }
 
-}
+//     }
+// }
 
-function displayScreen(index) {
-    
-    screenIndex = index;
 
-    switch (screenIndex) {
-        case 0:
-            $("#screenBackward").hide();
-            $("#screenForward").show();
+// function setTokens() {
+//     var pIndex = 0;
+//     var oIndex = 0;
 
-            // clearGame();
 
-            break;
+//     for (let i = 0; i < characterTokens.length; i++) {
 
-        case 1:
-            $("#screenBackward").show();
 
-            if(partyArray.length === 3){
-                $("#screenForward").show();
-            }else{
-                $("#screenForward").hide();
+
+//         if (partyArray.includes(characterArray[i])) {
+//             characterTokens[i].addClass("playerToken").attr("id", "player" + pIndex);
+//             pIndex++;
+
+//         } else {
+//             characterTokens[i].addClass("opponentToken").attr("id", "opponent" + oIndex);
+//             oIndex++;
+//         }
+
+//         characterTokens[i].hover(function () {
+//             previewWindow.append(characterCards[i]);
+//         }, function () {
+//             previewWindow.children(".card").remove();
+//         });
+
+//         battleWindow.append(characterTokens[i]);
+
+//     }
+// }
+
+
+
+// function startBattle() {
+//     setOpponentParty();
+//     setTokens();
+// }
+
+var  game = {
+    characterArray: [],
+    user: "",
+    opponent: "",
+    display: "",
+
+    init:  function () {
+        user = new game.Player();
+        opponent = new game.Player();
+
+        display = new game.Display();
+        display.buildScreenArray();
+        display.displayScreen(0);
+        game.buildCharacters();
+
+    },
+
+
+    Display: function () {
+        this.partyList = $("#partyList");
+        this.characterSelector = $("#characterSelector");
+        this.battleWindow = $("#battleWindow");
+        this.previewWindow = $("#previewWindow");
+        this.screenArray = [];
+        this.screenIndex = 0;
+        this.characterSelectInd = 0;
+        this.characterCards = [];
+        this.characterTokens = [];
+
+
+        this.buildScreenArray = function () {
+            this.screenArray = $(".screen");
+            this.screenArray.hide();
+            this.screenArray.eq(this.screenIndex).show();
+        }
+
+        this.cycleScreen = function (direction) {
+            this.screenArray.eq(this.screenIndex).hide();
+            if (direction === "left") {
+                this.screenIndex--;
+                if (this.screenIndex < 0) this.screenIndex = this.screenArray.length - 1;
+            } else if (direction === "right") {
+                this.screenIndex++;
+                if (this.screenIndex >= this.screenArray.length) this.screenIndex = 0;
             }
-            
+            this.displayScreen(this.screenIndex);
+        }
 
-            break;
+        this.displayScreen = function (index) {
 
-        case 2:
+            this.screenIndex = index;
 
-            $("#screenBackward").hide();
+            switch (this.screenIndex) {
+                case 0:
+                    $("#screenBackward").hide();
+                    $("#screenForward").show();
+
+                    // clearGame();
+
+                    break;
+
+                case 1:
+                    $("#screenBackward").show();
+
+                    if (user.party.length === 3) {
+                        $("#screenForward").show();
+                    } else {
+                        $("#screenForward").hide();
+                    }
+
+                    this.cycleCharacterSelector("right");
+
+
+                    break;
+
+                case 2:
+
+                    $("#screenBackward").hide();
+                    $("#screenForward").hide();
+                    startBattle();
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            $("#headerTitle").text(this.screenArray.eq(this.screenIndex).attr("tValue"));
+
+            this.screenArray.eq(this.screenIndex).show();
+        }
+
+        this.cycleCharacterSelector = function (direction = "right") {
+
+            if (direction === "right") {
+                do {
+                    this.characterSelectInd++;
+                    if (this.characterSelectInd >= game.characterArray.length) this.characterSelectInd = 0;
+                } while (user.party.includes(game.characterArray[this.characterSelectInd]))
+
+            } else if (direction === "left") {
+                do {
+                    this.characterSelectInd--;
+                    if (this.characterSelectInd < 0) this.characterSelectInd = game.characterArray.length - 1;
+
+                } while (user.party.includes(game.characterArray[this.characterSelectInd]));
+
+
+            }
+
+            this.characterSelector.children(".card").remove();
+
+            var card = this.characterCards[this.characterSelectInd];
+            card.bind("click", function () {
+                if (user.party.length < 3) {
+                    $(this).unbind();
+                    user.addPartyMember(game.characterArray[this.characterSelectInd]);
+                    
+                }
+            });
+            this.characterSelector.prepend(card);
+
+        }
+
+        this.buildCharacterCards = function () {
+            for (let i = 0; i < game.characterArray.length; i++) {
+        
+                this.characterCards[i] = this.getCharacterCard(game.characterArray[i]);
+        
+            }
+        }
+        
+        this.buildCharacterTokens = function () {
+            for (let i = 0; i < game.characterArray.length; i++) {
+        
+                this.characterTokens[i] = this.getCharacterToken(game.characterArray[i]);
+        
+            }
+        }
+
+        this.getCharacterToken = function(character) {
+            var token = $("<div>").attr("class", "token").html("<img src = " + character.img + ">");
+            return token;
+        }
+        
+        
+        
+        this.getCharacterCard = function(character) {
+            var card = $("<div>").attr("class", "card");
+            card.append($("<div>").attr("class", "memberName").text(character.name));
+            card.append($("<div>").attr("class", "memberImg").html("<img src = " + character.portrait + ">"));
+            card.append($("<div>").attr("class", "memberStat memberHealth").text("HEALTH: " + character.health));
+            card.append($("<div>").attr("class", "memberStat memberMana").text("MANA: " + character.mana));
+            card.append($("<div>").attr("class", "memberStat memberAttack").text("ATTACK " + character.attack));
+            card.append($("<div>").attr("class", "memberStat memberDefense").text("DEFENSE " + character.defense));
+            card.append($("<div>").attr("class", "memberStat memberMagicAttack").text("MAG.ATT " + character.magicAttack));
+            card.append($("<div>").attr("class", "memberStat memberMagicDefense").text("MAG.DEF " + character.magicDefense));
+        
+            return card;
+        }
+
+        this.addPartyMember = function() {
+
+
+            var card = this.characterCards[this.characterSelectInd];
+            card.attr("value", this.characterSelectInd);
+        
+            card.bind("click", function () {
+                user.removePartyMember(parseInt($(this).attr("value")));
+                $(this).remove();
+                $(this).unbind();
+            });
+        
+            this.partyList.append(card);
+            this.cycleCharacterSelector("right");
+        
+            if (user.party.length === 3) {
+                $("#screenForward").show();
+            }
+        
+        }
+
+        this.removePartyMember = function(index) {
             $("#screenForward").hide();
-            startBattle();
-
-            console.log(partyArray);
-            console.log(opponentArray);
-
-            break;
-
-        case 3:
-
-            break;
-
-        default:
-            break;
-    }
-
-
-    $("#headerTitle").text(screenArray.eq(screenIndex).attr("tValue"));
-
-    screenArray.eq(screenIndex).show();
-}
-
-function Character(name, hp, mana,  att, def, mAtt, mDef, img, portrait) {
-
-    //String
-    this.name = name;
-
-    // Number
-    this.health = hp;
-    this.mana = mana;
-    this.attack = att;
-    this.defense = def;
-    this.magicAttack = mAtt;
-    this.magicDefense = mDef;
-
-    //String (path)
-    this.img = img;
-    this.portrait = portrait;
-}
-
-function cycleCharacterSelector(direction = "right") {
-
-    if (direction === "right") {
-        do {
-            characterSelectInd++;
-            if (characterSelectInd >= characterArray.length) characterSelectInd = 0;
-        } while (partyArray.includes(characterArray[characterSelectInd]))
-
-    } else if (direction === "left") {
-        do {
-            characterSelectInd--;
-            if (characterSelectInd < 0) characterSelectInd = characterArray.length - 1;
-
-        } while (partyArray.includes(characterArray[characterSelectInd]));
-
-
-    }
-
-    characterSelector.children(".card").remove();
-
-    var card = characterCards[characterSelectInd];
-    card.bind("click", function () {
-        if (partyArray.length < 3) {
-            $(this).unbind();
-            addPartyMember()
-        }
-    });
-    characterSelector.prepend(card);
-
-}
-
-
-function buildCharacterCards() {
-    for (let i = 0; i < characterArray.length; i++) {
-
-        characterCards[i] = getCharacterCard(characterArray[i]);
-
-    }
-}
-
-function buildCharacterTokens() {
-    for (let i = 0; i < characterArray.length; i++) {
-
-        characterTokens[i] = getCharacterToken(characterArray[i]);
-
-    }
-}
-
-function getCharacterToken(character){
-    var token = $("<div>").attr("class", "token").html("<img src = " + character.img + ">");
-    return token;
-}
-
-
-
-function getCharacterCard(character) {
-    var card = $("<div>").attr("class", "card");
-    card.append($("<div>").attr("class", "memberName").text(character.name));
-    card.append($("<div>").attr("class", "memberImg").html("<img src = " + character.portrait + ">"));
-    card.append($("<div>").attr("class", "memberStat memberHealth").text("HEALTH: " + character.health));
-    card.append($("<div>").attr("class", "memberStat memberMana").text("MANA: " + character.mana));
-    card.append($("<div>").attr("class", "memberStat memberAttack").text("ATTACK " + character.attack));
-    card.append($("<div>").attr("class", "memberStat memberDefense").text("DEFENSE " + character.defense));
-    card.append($("<div>").attr("class", "memberStat memberMagicAttack").text("MAG.ATT " + character.magicAttack));
-    card.append($("<div>").attr("class", "memberStat memberMagicDefense").text("MAG.DEF " + character.magicDefense));
+        
+            if (user.party.includes(game.characterArray[index])) {
+                user.party.splice(user.party.indexOf(game.characterArray[index]), 1);
+            }
     
-    return card;
-}
-
-
-function addPartyMember() {
-
-    partyArray.push(characterArray[characterSelectInd]);
-
-    var card = characterCards[characterSelectInd];
-    card.attr("value", characterSelectInd);
-
-    card.bind("click", function () {
-        removePartyMember(parseInt($(this).attr("value")));
-        $(this).remove();
-        $(this).unbind();
-    });
-
-    partyList.append(card);
-    cycleCharacterSelector("right");
-
-    if (partyArray.length === 3) {
-        $("#screenForward").show();
-    }
-
-    console.log(partyArray.length);
-    console.log(partyArray);
-}
-
-function removePartyMember(index) {
-    $("#screenForward").hide();
-
-    if (partyArray.includes(characterArray[index])) {
-        partyArray.splice(partyArray.indexOf(characterArray[index]), 1);
-    }
-
-    console.log(partyArray.length);
-    console.log(partyArray);
-
-
-}
-
-function setOpponentParty(){
-    for (let i = 0; i < characterArray.length; i++) {
-       
-        if(!partyArray.includes(characterArray[i])){
-            opponentArray.push(characterArray[i]);
-        }
         
-    }
-}
-
-
-function setTokens(){
-    var pIndex = 0;
-    var oIndex = 0;
-    
-
-    for (let i = 0; i < characterTokens.length; i++) {
-
-        
-        
-        if(partyArray.includes(characterArray[i])){
-            characterTokens[i].addClass("playerToken").attr("id", "player" + pIndex);
-            pIndex++;
-
-        }else{
-            characterTokens[i].addClass("opponentToken").attr("id", "opponent" + oIndex);
-            oIndex++;
         }
 
-        characterTokens[i].hover(function (){
-            previewWindow.append(characterCards[i]);
-        }, function (){
-            previewWindow.children(".card").remove();
-        });
 
-        battleWindow.append(characterTokens[i]);
-        
+    },
+
+    Player: function () {
+        this.party = [];
+        this.selectingAlly = false;
+        this.selectingOpponent = false
+
+        this.addPartyMember = function (character) {
+            this.party.push(character);
+            display.addPartyMember()
+            console.log(this.party);
+        }
+
+        this.removePartyMember = function (character) {
+            if (this.party.includes(character)) {
+                this.party.splice(this.party.indexOf(character), 1);
+            }
+            display.removePartyMember();
+            console.log(this.party);
+        }
+    },
+
+    Character: function (name, hp, mana, att, def, mAtt, mDef, img, portrait) {
+
+        //String
+        this.name = name;
+
+        // Number
+        this.health = hp;
+        this.mana = mana;
+        this.attack = att;
+        this.defense = def;
+        this.magicAttack = mAtt;
+        this.magicDefense = mDef;
+
+        //String (path)
+        this.img = img;
+        this.portrait = portrait;
+    },
+
+    buildCharacters: function () {
+        game.characterArray[0] = new game.Character('Kage', 100, 50, 100, 100, 100, 100, "assets/images/Kage.png", "assets/images/KagePortrait.png");
+        game.characterArray[1] = new game.Character('Axel', 100, 100, 100, 100, 100, 100, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
+        game.characterArray[2] = new game.Character('Professor X', 100, 100, 100, 100, 100, 100, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png");
+        game.characterArray[3] = new game.Character('Reaper', 100, 100, 100, 100, 100, 100, "assets/images/Reaper.png", "assets/images/ReaperPortrait.png");
+        game.characterArray[4] = new game.Character('Rose', 100, 100, 100, 100, 100, 100, "assets/images/Rose.png", "assets/images/RosePortrait.png");
+        game.characterArray[5] = new game.Character('Spike', 100, 100, 100, 100, 100, 100, "assets/images/Spike.png", "assets/images/SpikePortrait.png");
+        game.characterArray[6] = new game.Character('Vanya', 100, 100, 100, 100, 100, 100, "assets/images/Vanya.png", "assets/images/VanyaPortrait.png");
+        game.characterArray[7] = new game.Character('Zero', 100, 100, 100, 100, 100, 100, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
+
+        display.buildCharacterCards();
+        display.buildCharacterTokens();
+    },
+
+
+    getDisplay: function(){
+        return display;
     }
-}
 
-
-
-function startBattle() {
-    setOpponentParty();
-    setTokens();
-}
-
+};
