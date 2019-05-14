@@ -3,12 +3,13 @@ html, body {
     margin: 0;
     font-family: monospace;
     font-size: 24px;
+    color: white;
 }
 
 #headerTitle {
     grid-column: 5/9;
     font-size: 32px;
-    color: white;
+    
 }
 
 header {
@@ -18,33 +19,30 @@ header {
     justify-items: center;
     align-items: center;
     text-align: center;
-    background-color: #990000;
+    background-color: #330000;
     border: 2px solid #000; 
 }
 
 .gameContainer {
-    position: relative;
     width: 90%;
     min-height: 800px;
     margin: 20px auto 20px auto;
-    border: 2px solid #000; 
-    
+    border: 2px solid #000;    
 }
 
 
 
 .screen{
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(15, 50px);
-    grid-gap: 5px;
-    text-align: center;
-    margin: 0;
+    height: 100%;
     
 }
 
 #titleScreen{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(15, 50px);
+    grid-gap: 5px;
     justify-items: center;
     align-items: center;
     text-align: center;
@@ -52,22 +50,192 @@ header {
 }
 
 #selectScreen{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(15, 50px);
+    grid-gap: 5px;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
     background-image: url(../images/dark_fish_skin.png);
 }
 
 #battleScreen{
+    
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(8, 100px);
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
     background-image: url(../images/dark_fish_skin.png);
+    
+}
+
+.battleDisplay{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: 5px solid black;
 }
 
 
 
+#controlWindow{
+    grid-row: 5/7;
+    grid-column: 8/14;
+    background-color: #55550055;
+    display: grid;
+    grid-template-columns: 1fr, 1fr;
+    grid-template-rows: 1fr, 1fr;
+    align-items: center;
+    justify-items: center;
+}
 
+
+#battleWindow{
+    grid-row: 1/5;
+    grid-column: 4/18;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    align-items: center;
+    background-color: #55000055;
+}
+
+.moveBtn{
+    width: 50%;
+    height: 50%;
+
+}
+
+
+#attackBtn{
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#magicBtn{
+    grid-row: 1;
+    grid-column: 2;
+}
+
+#itemBtn{
+    grid-row: 2;
+    grid-column: 1;
+}
+
+#defendBtn{
+    grid-row: 2;
+    grid-column: 2;
+}
+
+#controlWindow2{
+    grid-row: 7/9;
+    grid-column: 8/14;
+    background-color: #55550055;
+
+}
+
+#previewWindow{
+    grid-row: 5/9;
+    grid-column: 14/18;
+    background-color: #55550055;
+
+}
+
+.windowTitle{
+    width: 95%;
+    margin: 0 auto;
+    background-color: #00000055;
+    border: 2px solid black;
+    margin-bottom: 20px;
+}
+
+#consoleWindow{
+
+    grid-row: 5/9;
+    grid-column: 4/8;
+    background-color: #222222cc;
+    font-size: 20px;
+    line-height: 30px;
+
+}
+
+.token{
+    box-sizing: border-box;
+    margin: 0;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 3px solid #000;
+    
+}
+
+.playerToken{
+    box-shadow: 2px 2px #000, 4px 4px #000077, 8px 8px #000;
+}
+
+.opponentToken{
+    box-shadow: 2px 2px #000, 4px 4px #770000, 8px 8px #000;
+}
+
+.activeToken{
+    box-shadow: 2px 2px #000, 4px 4px #777700, 8px 8px #000;
+}
+
+#player0{
+    grid-row: 1;
+    grid-column: 4;
+
+}
+
+#player1{
+
+    grid-row: 1;
+    grid-column: 6;
+    
+}
+
+#player2{
+
+    grid-row: 1;
+    grid-column: 8;
+    
+}
+
+#opponent0{
+    grid-row: 5;
+    grid-column: 2;
+}
+
+#opponent1{
+    grid-row: 5;
+    grid-column: 4;
+}
+
+#opponent2{
+    grid-row: 5;
+    grid-column: 6;
+}
+
+#opponent3{
+    grid-row: 5;
+    grid-column: 8;
+}
+
+#opponent4{
+    grid-row: 5;
+    grid-column: 10;
+}
 
 #mainTitle{
     grid-column: 3/11;
     grid-row: 5/8;
     font-size: 98px;
-    color: white;
+    
 }
 
 #mainAuthor{
@@ -75,18 +243,15 @@ header {
     grid-column: 3/11;
     grid-row: 8;
     font-size: 28px;
-    color: white;
 }
 
 #mainInstructions{
     grid-column: 3/11;
     grid-row: 10;
     font-size: 28px;
-    color: white;
 }
 
 .sectionTitle{
-    color: white;
     font-size: 24px;
     padding: 10px;
 }
@@ -103,17 +268,13 @@ header {
 }
 
 #selectScreen #partyList{
+    grid-row: 2 / 12;
+    grid-column: 2/8;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-auto-rows: minmax(50px, auto);
     grid-gap: 10px;
     box-sizing: border-box;
-}
-
-
-#selectScreen #partyList{
-    grid-row: 2 / 12;
-    grid-column: 2/9;
     width: fit-content;
     padding: 10px;
 }
@@ -121,7 +282,6 @@ header {
 #selectScreen #characterSelector{
     grid-row: 2 / 12;
     grid-column: 9/12;
-    
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
     justify-items: center;
@@ -208,8 +368,7 @@ header #screenForward:hover{
     grid-area: name;
     font-size: 28px;
     padding: 3%;
-    color: white;
-    background-color: #990000;
+    background-color: #99000077;
     border-bottom: 5px solid #000;
     border-top: 1px solid #000;   
 }
@@ -217,8 +376,8 @@ header #screenForward:hover{
 .card .memberStat{
     padding: 5px;
     box-sizing: border-box;
-    color: white;
     border: 1px solid black;
+    background-color: #00550077;
     
 }
 
@@ -234,44 +393,43 @@ header #screenForward:hover{
 
 .card .memberHealth{
     grid-area: hp;
-    background-color: #550000;
+    background-color: #55000077;
     
 }
 
 .card .memberMana{
     grid-area: mp;
-    background-color: #000055;
+    background-color: #00005577;
+    
     
 }
 
 .card .memberAttack{
     grid-area: att;
-    background-color: #005500;
+    
     
 }
 
 .card .memberDefense{
     grid-area: def;
-    background-color: #005500;
+   
     
 }
 .card .memberMagicAttack{
     grid-area: mAtt;
-    background-color: #005500;
+    
     
 }
 .card .memberMagicDefense{
     grid-area: mDef;
-    background-color: #005500;
+    
     
 }
-
-
 
 footer {
     box-sizing: border-box;
     height: 100px;
-    background-color:  #777; 
+    background-color:  #333; 
     border-top: 5px solid #000; 
 }
 

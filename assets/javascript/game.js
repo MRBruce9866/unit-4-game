@@ -1,15 +1,17 @@
 //Html selectors;
-var playerCardArray = $(".playerCard");
-var opponentCardArray = $(".opponentCard");
 var partyList = $("#partyList");
 var characterSelector = $("#characterSelector");
+var battleWindow = $("#battleWindow");
 
 
 //Global Variables
 
 var characterSelectInd = 0;
 var partyArray = [];
+var opponentArray = [];
 var characterCards = [];
+var characterTokens = [];
+
 var screenArray = [];
 var screenIndex = 0;
 
@@ -22,9 +24,9 @@ var screenIndex = 0;
 var characterArray = [];
 
 
-characterArray[0] = new Character('Kage', 100, 100, 100, 100, 100, 100, "assets/images/Kage.png", "assets/images/KagePortrait.png");
+characterArray[0] = new Character('Kage', 100, 50, 100, 100, 100, 100, "assets/images/Kage.png", "assets/images/KagePortrait.png");
 characterArray[1] = new Character('Axel', 100, 100, 100, 100, 100, 100, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
-characterArray[2] = new Character('Professor', 100, 100, 100, 100, 100, 100, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png");
+characterArray[2] = new Character('Professor X', 100, 100, 100, 100, 100, 100, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png");
 characterArray[3] = new Character('Reaper', 100, 100, 100, 100, 100, 100, "assets/images/Reaper.png", "assets/images/ReaperPortrait.png");
 characterArray[4] = new Character('Rose', 100, 100, 100, 100, 100, 100, "assets/images/Rose.png", "assets/images/RosePortrait.png");
 characterArray[5] = new Character('Spike', 100, 100, 100, 100, 100, 100, "assets/images/Spike.png", "assets/images/SpikePortrait.png");
@@ -32,10 +34,9 @@ characterArray[6] = new Character('Vanya', 100, 100, 100, 100, 100, 100, "assets
 characterArray[7] = new Character('Zero', 100, 100, 100, 100, 100, 100, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
 
 
-//Game Object
-
 $(document).ready(function () {
     buildCharacterCards();
+    buildCharacterTokens();
     cycleCharacterSelector("right");
     buildScreenArray();
     displayScreen(screenIndex);
@@ -114,6 +115,10 @@ function displayScreen(index) {
 
             $("#screenBackward").hide();
             $("#screenForward").hide();
+            startBattle();
+
+            console.log(partyArray);
+            console.log(opponentArray);
 
             break;
 
@@ -189,7 +194,22 @@ function buildCharacterCards() {
     }
 }
 
-function getCharacterCard(character, party) {
+function buildCharacterTokens() {
+    for (let i = 0; i < characterArray.length; i++) {
+
+        characterTokens[i] = getCharacterToken(characterArray[i]);
+
+    }
+}
+
+function getCharacterToken(character){
+    var token = $("<div>").attr("class", "token").html("<img src = " + character.img + ">");
+    return token;
+}
+
+
+
+function getCharacterCard(character) {
     var card = $("<div>").attr("class", "card");
     card.append($("<div>").attr("class", "memberName").text(character.name));
     card.append($("<div>").attr("class", "memberImg").html("<img src = " + character.portrait + ">"));
@@ -197,8 +217,8 @@ function getCharacterCard(character, party) {
     card.append($("<div>").attr("class", "memberStat memberMana").text("MANA: " + character.mana));
     card.append($("<div>").attr("class", "memberStat memberAttack").text("ATTACK " + character.attack));
     card.append($("<div>").attr("class", "memberStat memberDefense").text("DEFENSE " + character.defense));
-    card.append($("<div>").attr("class", "memberStat memberMagicAttack").text("M.ATT " + character.magicAttack));
-    card.append($("<div>").attr("class", "memberStat memberMagicDefense").text("M.DEF " + character.magicDefense));
+    card.append($("<div>").attr("class", "memberStat memberMagicAttack").text("MAG.ATT " + character.magicAttack));
+    card.append($("<div>").attr("class", "memberStat memberMagicDefense").text("MAG.DEF " + character.magicDefense));
     
     return card;
 }
@@ -239,5 +259,45 @@ function removePartyMember(index) {
     console.log(partyArray);
 
 
+}
+
+function setOpponentParty(){
+    for (let i = 0; i < characterArray.length; i++) {
+       
+        if(!partyArray.includes(characterArray[i])){
+            opponentArray.push(characterArray[i]);
+        }
+        
+    }
+}
+
+
+function setTokens(){
+    var pIndex = 0;
+    var oIndex = 0;
+    
+
+    for (let i = 0; i < characterTokens.length; i++) {
+
+        
+        
+        if(partyArray.includes(characterArray[i])){
+            characterTokens[i].addClass("playerToken").attr("id", "player" + pIndex);
+            pIndex++;
+
+        }else{
+            characterTokens[i].addClass("opponentToken").attr("id", "opponent" + oIndex);
+            oIndex++;
+        }
+
+        battleWindow.append(characterTokens[i]);
+        
+    }
+}
+
+
+function startBattle() {
+    setOpponentParty();
+    setTokens();
 }
 
