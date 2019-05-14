@@ -2,6 +2,7 @@
 var partyList = $("#partyList");
 var characterSelector = $("#characterSelector");
 var battleWindow = $("#battleWindow");
+var previewWindow = $("#previewWindow");
 
 
 //Global Variables
@@ -14,6 +15,9 @@ var characterTokens = [];
 
 var screenArray = [];
 var screenIndex = 0;
+
+var selectingAlly = false;
+var selectingOpponent = false;
 
 
 
@@ -290,10 +294,17 @@ function setTokens(){
             oIndex++;
         }
 
+        characterTokens[i].hover(function (){
+            previewWindow.append(characterCards[i]);
+        }, function (){
+            previewWindow.children(".card").remove();
+        });
+
         battleWindow.append(characterTokens[i]);
         
     }
 }
+
 
 
 function startBattle() {
