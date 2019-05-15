@@ -24,16 +24,15 @@ var selectingOpponent = false;
 
 
 //Character Objects
-var characterArray = [];
-characterArray[0] = new Character('Kage', 100, 50, 100, 100, 100, 100, "assets/images/Kage.png", "assets/images/KagePortrait.png");
-characterArray[1] = new Character('Axel', 100, 100, 100, 100, 100, 100, "assets/images/Axel.png", "assets/images/AxelPortrait.png");
-characterArray[2] = new Character('Professor X', 100, 100, 100, 100, 100, 100, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png");
-characterArray[3] = new Character('Reaper', 100, 100, 100, 100, 100, 100, "assets/images/Reaper.png", "assets/images/ReaperPortrait.png");
-characterArray[4] = new Character('Rose', 100, 100, 100, 100, 100, 100, "assets/images/Rose.png", "assets/images/RosePortrait.png");
-characterArray[5] = new Character('Spike', 100, 100, 100, 100, 100, 100, "assets/images/Spike.png", "assets/images/SpikePortrait.png");
-characterArray[6] = new Character('Vanya', 100, 100, 100, 100, 100, 100, "assets/images/Vanya.png", "assets/images/VanyaPortrait.png");
-characterArray[7] = new Character('Zero', 100, 100, 100, 100, 100, 100, "assets/images/Zero.png", "assets/images/ZeroPortrait.png");
-
+var characterArray = [
+    new Character('Kage', 100, 50, 100, 100, 100, 100, "assets/images/Kage.png", "assets/images/KagePortrait.png"),
+    new Character('Axel', 100, 100, 100, 100, 100, 100, "assets/images/Axel.png", "assets/images/AxelPortrait.png"),
+    new Character('Professor X', 100, 100, 100, 100, 100, 100, "assets/images/Professor.png", "assets/images/ProfessorPortrait.png"),   new Character('Reaper', 100, 100, 100, 100, 100, 100, "assets/images/Reaper.png", "assets/images/ReaperPortrait.png"),
+    new Character('Rose', 100, 100, 100, 100, 100, 100, "assets/images/Rose.png", "assets/images/RosePortrait.png"),
+    new Character('Spike', 100, 100, 100, 100, 100, 100, "assets/images/Spike.png", "assets/images/SpikePortrait.png"),
+    new Character('Vanya', 100, 100, 100, 100, 100, 100, "assets/images/Vanya.png", "assets/images/VanyaPortrait.png"),
+    new Character('Zero', 100, 100, 100, 100, 100, 100, "assets/images/Zero.png", "assets/images/ZeroPortrait.png")
+];
 
 
 //Player Objects
@@ -41,8 +40,8 @@ characterArray[7] = new Character('Zero', 100, 100, 100, 100, 100, 100, "assets/
 
 
 $(document).ready(function () {
-    buildCharacterCards();
-    buildCharacterTokens();
+    characterCards = buildCharacterCards(characterArray);
+    characterTokens = buildCharacterTokens(characterArray);
     cycleCharacterSelector("right");
     buildScreenArray();
     displayScreen(screenIndex);
@@ -142,24 +141,6 @@ function displayScreen(index) {
     screenArray.eq(screenIndex).show();
 }
 
-function Character(name, hp, mana, att, def, mAtt, mDef, img, portrait) {
-
-    //String
-    this.name = name;
-
-    // Number
-    this.health = hp;
-    this.mana = mana;
-    this.attack = att;
-    this.defense = def;
-    this.magicAttack = mAtt;
-    this.magicDefense = mDef;
-
-    //String (path)
-    this.img = img;
-    this.portrait = portrait;
-}
-
 function cycleCharacterSelector(direction = "right") {
 
     if (direction === "right") {
@@ -192,28 +173,24 @@ function cycleCharacterSelector(direction = "right") {
 }
 
 
-function buildCharacterCards() {
-    for (let i = 0; i < characterArray.length; i++) {
-
-        characterCards[i] = getCharacterCard(characterArray[i]);
-
-    }
+function buildCharacterCards(characterArray) {
+    return characterArray.map(function(character){
+        return getCharacterCard(character);
+    })
 }
 
-function buildCharacterTokens() {
-    for (let i = 0; i < characterArray.length; i++) {
-
-        characterTokens[i] = getCharacterToken(characterArray[i]);
-
-    }
+// createing an array of charcter tokens
+function buildCharacterTokens(characterArray) {
+    return characterArray.map(function(character){
+        return getCharacterToken(character);
+    });
 }
+
 
 function getCharacterToken(character) {
     var token = $("<div>").attr("class", "token").html("<img src = " + character.img + ">");
     return token;
 }
-
-
 
 function getCharacterCard(character) {
     var card = $("<div>").attr("class", "card");
@@ -228,7 +205,6 @@ function getCharacterCard(character) {
 
     return card;
 }
-
 
 function addPartyMember() {
 
